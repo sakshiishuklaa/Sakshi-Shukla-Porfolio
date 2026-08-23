@@ -1,206 +1,60 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope, FaBrain, FaRobot, FaCode, FaArrowUp } from 'react-icons/fa';
+import { FaArrowUp, FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 import profile from '../data/profile';
 
-const footerSocialLinks = profile.socialLinks;
-
 const FooterComponent = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const buttonVariants = {
-    hover: {
-      scale: 1.05,
-      transition: {
-        duration: 0.3
-      }
-    },
-    tap: { scale: 0.95 }
-  };
-  
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
-  const footerLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' }
-  ];
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <footer className="relative bg-white border-t border-gray-200 py-16 sm:py-20">
-      {/* Subtle background elements */}
-      <div className="absolute inset-0 overflow-hidden opacity-[0.02]">
-        <div className="absolute top-10 left-10">
-          <FaBrain className="w-32 h-32 text-supply-primary" />
-        </div>
-        <div className="absolute bottom-10 right-10">
-          <FaRobot className="w-24 h-24 text-supply-secondary" />
-        </div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <FaCode className="w-48 h-48 text-supply-primary" />
-        </div>
-      </div>
-      
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
-          {/* Brand Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="col-span-1 sm:col-span-2 md:col-span-1"
-          >
-            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-              <FaBrain className="text-supply-primary w-5 h-5 sm:w-6 sm:h-6" />
-              <h3 className="text-lg sm:text-xl font-bold text-supply-dark">{profile.title}</h3>
-            </div>
-            <p className="text-supply-gray mb-4 sm:mb-6 text-sm sm:text-base">
-              {profile.contact.availability}
+    <footer className="border-t border-supply-lightgray bg-white mt-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+          <div>
+            <p className="font-heading text-2xl text-supply-dark">{profile.name}</p>
+            <p className="text-sm text-supply-gray mt-2 max-w-sm">
+              {profile.title} at {profile.company}. {profile.contact.availability}.
             </p>
-            <div className="flex gap-3 sm:gap-4">
-              <motion.a
-                href={footerSocialLinks.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
-                className="p-1.5 sm:p-2 rounded-md bg-supply-light hover:bg-supply-light/80 text-supply-primary transition-colors"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin className="w-4 h-4 sm:w-5 sm:h-5" />
-              </motion.a>
-              <motion.a
-                href={footerSocialLinks.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
-                className="p-1.5 sm:p-2 rounded-md bg-supply-light hover:bg-supply-light/80 text-supply-primary transition-colors"
-                aria-label="GitHub"
-              >
-                <FaGithub className="w-4 h-4 sm:w-5 sm:h-5" />
-              </motion.a>
-            </div>
-          </motion.div>
-
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="col-span-1"
-          >
-            <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-supply-dark">Quick Links</h3>
-            <ul className="space-y-1 sm:space-y-2 text-sm sm:text-base">
-              {footerLinks.map((link, index) => (
-                <li key={index}>
-                  <a 
-                    href={link.href} 
-                    className="text-supply-gray hover:text-supply-primary transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Services */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="col-span-1"
-          >
-            <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-supply-dark">Expertise</h3>
-            <ul className="space-y-1 sm:space-y-2 text-sm sm:text-base">
-              <li className="text-supply-gray">Data Pipelines & ETL/ELT</li>
-              <li className="text-supply-gray">SQL & Data Modeling</li>
-              <li className="text-supply-gray">Workflow Orchestration</li>
-              <li className="text-supply-gray">Cloud Data Platforms</li>
-              <li className="text-supply-gray">ML & Deep Learning Enablement</li>
-            </ul>
-          </motion.div>
-
-          {/* Contact */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="col-span-1 sm:col-span-2 md:col-span-1"
-          >
-            <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-supply-dark">Contact</h3>
-            <p className="text-supply-gray mb-3 sm:mb-4 text-sm sm:text-base">
-              {profile.contact.availability}
-            </p>
-            <motion.a
-              href={`mailto:${profile.socialLinks.email}`}
-              variants={buttonVariants}
-              whileHover="hover"
-              whileTap="tap"
-              className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-supply-primary text-white rounded-md shadow-sm hover:bg-supply-secondary transition-all duration-300 text-sm sm:text-base"
+          </div>
+          <div className="flex items-center gap-3">
+            <a
+              href={profile.socialLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-full border border-supply-lightgray text-supply-gray hover:text-supply-primary"
+              aria-label="LinkedIn"
             >
-              <FaEnvelope className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span>Email Me</span>
-            </motion.a>
-          </motion.div>
+              <FaLinkedin />
+            </a>
+            <a
+              href={profile.socialLinks.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-full border border-supply-lightgray text-supply-gray hover:text-supply-primary"
+              aria-label="GitHub"
+            >
+              <FaGithub />
+            </a>
+            <a
+              href={`mailto:${profile.socialLinks.email}`}
+              className="p-2.5 rounded-full border border-supply-lightgray text-supply-gray hover:text-supply-primary"
+              aria-label="Email"
+            >
+              <FaEnvelope />
+            </a>
+            <button
+              onClick={scrollToTop}
+              className="p-2.5 rounded-full bg-supply-dark text-white hover:bg-supply-primary"
+              aria-label="Back to top"
+            >
+              <FaArrowUp className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
-
-        {/* Divider */}
-        <div className="h-px bg-gray-200 my-8 sm:my-10"></div>
-
-        {/* Bottom Section */}
-        <div className="flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-supply-gray text-xs sm:text-sm mb-4 sm:mb-0 text-center sm:text-left">
-            © {new Date().getFullYear()} {profile.name}. All rights reserved.
-          </p>
-          <motion.button
-            onClick={scrollToTop}
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            className="p-2 sm:p-3 rounded-md bg-supply-light hover:bg-supply-primary hover:text-white text-supply-primary transition-all duration-300"
-            aria-label="Scroll to top"
-          >
-            <FaArrowUp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-          </motion.button>
-        </div>
+        <p className="text-xs text-supply-gray mt-10">
+          © {new Date().getFullYear()} {profile.name}
+        </p>
       </div>
     </footer>
   );
 };
 
-export default FooterComponent; 
+export default FooterComponent;

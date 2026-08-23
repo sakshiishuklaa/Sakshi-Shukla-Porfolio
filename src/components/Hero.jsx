@@ -1,131 +1,112 @@
 import { motion } from 'framer-motion';
-import { FaArrowRight, FaBrain, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaArrowRight, FaGithub, FaLinkedin } from 'react-icons/fa';
 import profile from '../data/profile';
 
-const Hero = () => {
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  };
+const featuredSkills = [
+  ...profile.skills.languages,
+  ...profile.skills.frameworks,
+  ...profile.skills.cloud,
+  'Databricks',
+  'Airflow'
+];
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.5, ease: "easeOut" }
-    }
-  };
-
-  return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-20">
-      {/* Main content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+const Hero = () => (
+  <section className="relative min-h-[calc(100vh-72px)] flex items-center py-16 sm:py-24">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
+      <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-center">
         <motion.div
-          className="flex flex-col items-center justify-center text-center"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55 }}
         >
-          {/* Professional hero content */}
-          <motion.div className="max-w-3xl mx-auto" variants={itemVariants}>
-            <motion.div className="mb-4 sm:mb-6 flex flex-col sm:flex-row gap-2 justify-center items-center" variants={itemVariants}>
-              <span className="px-3 sm:px-4 py-1.5 bg-supply-primary/10 text-supply-primary rounded-md text-xs sm:text-sm font-medium inline-block border border-supply-primary/20">
-                {profile.title}
-              </span>
-            </motion.div>
+          <p className="text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase text-supply-primary mb-5">
+            {profile.title} · {profile.company}
+          </p>
+          <h1 className="font-heading text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.12] text-supply-dark">
+            {profile.name}
+          </h1>
+          <p className="mt-6 text-lg text-supply-gray leading-relaxed max-w-xl">
+            {profile.heroDescription}
+          </p>
 
-            <motion.h1
-              className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 tracking-tight leading-tight px-4 sm:px-0"
-              variants={itemVariants}
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a
+              href="#projects"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-supply-dark text-white text-sm font-semibold hover:bg-supply-primary transition-colors"
             >
-              <span className="bg-gradient-to-r from-supply-primary to-supply-secondary bg-clip-text text-transparent">{profile.name}</span>
-            </motion.h1>
-
-            <motion.p
-              className="text-supply-gray mb-6 sm:mb-8 text-base sm:text-lg md:text-xl leading-relaxed mx-auto px-4 sm:px-6 md:px-8 max-w-full sm:max-w-2xl"
-              variants={itemVariants}
+              {profile.ctaText} <FaArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center px-6 py-3 rounded-full border border-supply-dark/15 text-supply-dark text-sm font-semibold hover:border-supply-primary hover:text-supply-primary transition-colors"
             >
-              {profile.heroDescription}
-            </motion.p>
+              Contact
+            </a>
+          </div>
 
-            <motion.div
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-10 justify-center px-4"
-              variants={itemVariants}
+          <div className="mt-8 flex items-center gap-3">
+            <a
+              href={profile.socialLinks.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-full border border-supply-lightgray bg-white text-supply-gray hover:text-supply-primary hover:border-supply-primary/40 transition-colors"
+              aria-label="GitHub"
             >
-              <motion.a
-                href="#projects"
-                className="w-full sm:w-auto px-7 py-3 sm:py-3.5 bg-supply-primary text-white rounded-md text-base sm:text-lg font-medium shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-center"
-              >
-                <FaBrain className="mr-2 w-5 h-5" /> {profile.ctaText} <FaArrowRight className="ml-2 w-5 h-5" />
-              </motion.a>
-            </motion.div>
+              <FaGithub className="w-5 h-5" />
+            </a>
+            <a
+              href={profile.socialLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-full border border-supply-lightgray bg-white text-supply-gray hover:text-supply-primary hover:border-supply-primary/40 transition-colors"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedin className="w-5 h-5" />
+            </a>
+          </div>
+        </motion.div>
 
-            {/* Horizontal line separator */}
-            <motion.div
-              className="w-16 sm:w-24 h-0.5 sm:h-1 bg-supply-primary/30 mx-auto mb-8 sm:mb-10"
-              variants={itemVariants}
-            ></motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.12 }}
+          className="surface-card p-6 sm:p-8"
+        >
+          <p className="text-xs font-semibold tracking-[0.16em] uppercase text-supply-gray mb-6">
+            Currently
+          </p>
+          <p className="font-heading text-2xl text-supply-dark">{profile.about.experiences[0].role}</p>
+          <p className="mt-1 text-supply-primary font-medium">{profile.company}</p>
+          <p className="mt-1 text-sm text-supply-gray">{profile.about.experiences[0].duration}</p>
 
-            {/* Tech stack icons */}
-            {/* <motion.div variants={itemVariants} className="mb-8 sm:mb-10 px-2 sm:px-0">
-              <p className="text-xs sm:text-sm text-supply-gray mb-4 sm:mb-5 font-medium uppercase tracking-wider">Data Engineering Stack</p>
-              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
-                {[
-                  { icon: <SiPython className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Python", color: "bg-yellow-400" },
-                  { icon: <SiPostgresql className="w-5 h-5 sm:w-6 sm:h-6" />, label: "SQL (Postgres)", color: "bg-blue-600" },
-                  { icon: <SiApacheairflow className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Airflow", color: "bg-sky-500" },
-                  { icon: <SiApachespark className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Spark", color: "bg-orange-600" },
-                  { icon: <SiAmazonaws className="w-5 h-5 sm:w-6 sm:h-6" />, label: "AWS", color: "bg-yellow-600" },
-                ].map((tech, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 bg-white rounded-md shadow-sm border border-gray-100"
-                  >
-                    <span className={`${tech.color} text-white p-1 sm:p-1.5 rounded-md mr-2 sm:mr-3`}>
-                      {tech.icon}
-                    </span>
-                    <span className="text-sm sm:text-base font-medium text-supply-dark">{tech.label}</span>
-                  </motion.div>
-                ))}
+          <div className="grid grid-cols-3 gap-3 mt-8 pt-6 border-t border-supply-lightgray">
+            {profile.highlights.map((item) => (
+              <div key={item.label}>
+                <p className="font-heading text-xl text-supply-dark">{item.value}</p>
+                <p className="text-[11px] leading-snug text-supply-gray mt-1">{item.label}</p>
               </div>
-            </motion.div> */}
+            ))}
+          </div>
 
-            <motion.div
-              className="flex space-x-4 sm:space-x-5 justify-center"
-              variants={itemVariants}
-            >
-              <motion.a
-                href={profile.socialLinks.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 sm:p-2.5 text-supply-gray hover:text-supply-primary transition-colors bg-white rounded-md shadow-sm hover:shadow-md"
-                aria-label="GitHub Profile"
-              >
-                <FaGithub className="w-5 h-5 sm:w-6 sm:h-6" />
-              </motion.a>
-              <motion.a
-                href={profile.socialLinks.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 sm:p-2.5 text-supply-gray hover:text-supply-primary transition-colors bg-white rounded-md shadow-sm hover:shadow-md"
-                aria-label="LinkedIn Profile"
-              >
-                <FaLinkedin className="w-5 h-5 sm:w-6 sm:h-6" />
-              </motion.a>
-            </motion.div>
-          </motion.div>
+          <div className="mt-8">
+            <p className="text-xs font-semibold tracking-[0.16em] uppercase text-supply-gray mb-3">
+              Stack
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {featuredSkills.map((skill) => (
+                <span
+                  key={skill}
+                  className="px-2.5 py-1 rounded-full text-xs font-medium bg-supply-light text-supply-dark"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Hero;

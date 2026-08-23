@@ -1,136 +1,38 @@
-# Portfolio Template Guide
+# Sakshi Shukla — Portfolio
 
-This repository is a customizable React portfolio built with Vite, Tailwind CSS, and Framer Motion. It is designed to be reused as a template for AI, Data Engineering, and Software Engineering portfolios.
+Personal site for Sakshi Shukla, Data Engineer at Tata Consultancy Services (since June 2024).
 
-## Quick Overview
+Built with React, Vite, Tailwind CSS, and Framer Motion.
 
-- `src/data/profile.js` — main configuration for personal branding, headline, experience, education, contact, and social links.
-- `src/data/projects.js` — portfolio project cards and project details.
-- `src/components/` — UI sections such as `Hero`, `About`, `Projects`, `Contact`, and `Footer`.
-- `vercel.json` — deployment settings for Vercel.
-
-## How to Use This Portfolio as a Template
-
-### 1. Clone or fork this repository
-
-```bash
-git clone <repo-url>
-cd Analyst-Portfolio
-```
-
-### 2. Install dependencies
+## Run locally
 
 ```bash
 npm install
-```
-
-### 3. Customize your profile
-
-Open `src/data/profile.js` and update the following fields:
-
-- `name`
-- `title`
-- `heroDescription`
-- `ctaText`
-- `about.summary`
-- `about.careerFocus`
-- `about.experiences`
-- `about.education`
-- `contact.location`
-- `contact.availability`
-- `contact.intro`
-- `contact.vcfFile`
-- `contact.vcfDownloadName`
-- `socialLinks`
-- `projects.githubText`
-- `projects.callToAction`
-
-This file is the central place for personal copy and details.
-
-### 4. Update project cards
-
-Open `src/data/projects.js` and edit the `projects` array. For each project you can change:
-
-- `title`
-- `description`
-- `techStack`
-- `githubLink`
-- `demoLink`
-- `image`
-
-Add or remove projects to fit your portfolio.
-
-### 5. Adjust content and visuals
-
-If you want to make layout or design changes:
-
-- Edit section copy in `src/components/` as needed
-- Adjust theme colors in `src/styles/theme.css`
-- Modify page behavior in `src/App.jsx`
-
-### 6. Replace the vCard (optional)
-
-The portfolio includes a sample vCard file at `public/contact.vcf`. Replace it with your own file and update `profile.contact.vcfFile` and `profile.contact.vcfDownloadName` if the name changes.
-
-## Run Locally
-
-Start the development server:
-
-```bash
 npm run dev
 ```
 
-Open the local URL shown in the terminal and verify your updates.
+Open the URL shown in the terminal (usually http://localhost:3000).
 
-## Build for Production
+## Edit content
 
-To create a production build:
+- Profile, experience, skills, and links: `src/data/profile.js`
+- Project cards: `src/data/projects.js`
 
-```bash
-npm run build
-```
+## Deploy on Vercel
 
-The compiled site output is placed in `dist/`.
-
-## Deploy to Vercel
-
-This project is already ready for Vercel deployment.
-
-### Option 1: Deploy from GitHub
-
-1. Push your repository to GitHub.
-2. Log in to Vercel and click `New Project`.
-3. Select your repository.
-4. Set the root directory to the repository root.
-5. Vercel will usually detect the framework automatically.
-   - Build command: `npm run build`
-   - Output directory: `dist`
-6. Deploy.
-
-### Option 2: Deploy using Vercel CLI
-
-If you prefer the command line:
+1. Create a GitHub repository and push this project:
 
 ```bash
-npm install -g vercel
-vercel login
-vercel
+git init
+git add .
+git commit -m "Add Sakshi Shukla portfolio"
+git branch -M main
+git remote add origin https://github.com/<your-username>/<repo-name>.git
+git push -u origin main
 ```
 
-Follow the prompts and choose the project root.
+2. Go to [vercel.com](https://vercel.com), import that GitHub repo.
+3. Framework: Vite. Build command: `npm run build`. Output: `dist`.
+4. Deploy. Future pushes to `main` will update the live site.
 
-## Notes for Template Use
-
-- `src/data/profile.js` is the main user-editable configuration file.
-- `src/data/projects.js` controls the project showcase.
-- The portfolio is intentionally built for reuse with minimal code changes.
-- If you are sharing this template with someone else, tell them to start by editing `src/data/profile.js` and `src/data/projects.js`.
-
-## Troubleshooting
-
-- If the site fails to load locally, ensure all imports are correct and that `npm install` completed successfully.
-- If Vercel fails on deploy, confirm the build command is `npm run build` and the output directory is `dist`.
-
----
-
-Happy customizing! 🚀
+After you have a live URL, replace the placeholder Open Graph URL in `index.html` if you want richer social previews.

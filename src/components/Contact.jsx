@@ -1,183 +1,147 @@
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt, FaTwitter } from 'react-icons/fa';
+import { FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt } from 'react-icons/fa';
 import profile from '../data/profile';
+import SectionHeading from './SectionHeading';
 
-const Contact = () => {
-  return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <div className="max-w-5xl mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+const Contact = () => (
+  <section className="py-6 sm:py-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <SectionHeading
+        eyebrow="Contact"
+        title="Let's"
+        accent="connect"
+        description={profile.contact.intro}
+      />
+
+      <div className="mt-12 grid lg:grid-cols-2 gap-6">
+        <motion.form
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="surface-card p-6 sm:p-8 space-y-4"
+          onSubmit={(event) => {
+            event.preventDefault();
+            const data = new FormData(event.currentTarget);
+            const name = data.get('name') || '';
+            const email = data.get('email') || '';
+            const message = data.get('message') || '';
+            const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+            window.location.href = `mailto:${profile.socialLinks.email}?subject=${subject}&body=${body}`;
+          }}
         >
-          <div className="inline-block mb-3">
-            <span className="px-4 py-1 bg-supply-primary/10 text-supply-primary rounded-full text-sm font-medium">
-              Get In Touch
-            </span>
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-supply-dark mb-1.5">
+              Name
+            </label>
+            <input
+              id="name"
+              name="name"
+              required
+              className="w-full px-4 py-2.5 rounded-xl border border-supply-lightgray bg-supply-background focus:ring-2 focus:ring-supply-primary/30 focus:border-supply-primary outline-none"
+              placeholder="Your name"
+            />
           </div>
-          <h2 className="text-4xl font-bold text-supply-dark mb-4">Let's <span className="text-supply-primary">Connect</span></h2>
-          <p className="text-supply-gray text-lg mb-8 max-w-2xl mx-auto">
-            {profile.contact.intro}
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white p-8 rounded-xl shadow-md"
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-supply-dark mb-1.5">
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              className="w-full px-4 py-2.5 rounded-xl border border-supply-lightgray bg-supply-background focus:ring-2 focus:ring-supply-primary/30 focus:border-supply-primary outline-none"
+              placeholder="you@email.com"
+            />
+          </div>
+          <div>
+            <label htmlFor="message" className="block text-sm font-medium text-supply-dark mb-1.5">
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+              className="w-full px-4 py-2.5 rounded-xl border border-supply-lightgray bg-supply-background focus:ring-2 focus:ring-supply-primary/30 focus:border-supply-primary outline-none resize-none"
+              placeholder="What would you like to talk about?"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full py-3 rounded-full bg-supply-dark text-white font-semibold hover:bg-supply-primary transition-colors"
           >
-            <h3 className="text-xl font-semibold text-supply-dark mb-6">Start a Data Conversation</h3>
-            <form className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-supply-gray mb-1">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  className="w-full px-4 py-2 border border-supply-lightgray rounded-lg focus:ring-2 focus:ring-supply-primary focus:border-supply-primary transition-colors"
-                  placeholder="Your name"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-supply-gray mb-1">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full px-4 py-2 border border-supply-lightgray rounded-lg focus:ring-2 focus:ring-supply-primary focus:border-supply-primary transition-colors"
-                  placeholder="Your email"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-supply-gray mb-1">Message</label>
-                <textarea
-                  id="message"
-                  rows="4"
-                  className="w-full px-4 py-2 border border-supply-lightgray rounded-lg focus:ring-2 focus:ring-supply-primary focus:border-supply-primary transition-colors"
-                  placeholder="Your message"
-                ></textarea>
-              </div>
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full px-6 py-3 bg-supply-primary text-white rounded-lg shadow-md hover:bg-supply-highlight transition-all duration-300 font-medium"
-              >
-                Send Message
-              </motion.button>
-            </form>
-          </motion.div>
+            Send message
+          </button>
+        </motion.form>
 
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col justify-between"
-          >
-            <div className="bg-white p-8 rounded-xl shadow-md mb-6">
-              <h3 className="text-xl font-semibold text-supply-dark mb-6">Contact Information</h3>
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-supply-primary/10 rounded-full">
-                    <FaEnvelope className="w-5 h-5 text-supply-primary" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-medium text-supply-gray">Email</h4>
-                    <a href={`mailto:${profile.socialLinks.email}`} className="text-supply-dark hover:text-supply-primary transition-colors">
-                      {profile.socialLinks.email}
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-supply-primary/10 rounded-full">
-                    <FaMapMarkerAlt className="w-5 h-5 text-supply-primary" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-medium text-supply-gray">Location</h4>
-                    <p className="text-supply-dark">{profile.contact.location}</p>
-                  </div>
-                </div>
-                <div className="mt-6">
-                  <a
-                    href={profile.contact.vcfFile}
-                    download={profile.contact.vcfDownloadName}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-supply-primary text-white text-sm font-medium shadow hover:bg-supply-highlight transition-colors border border-supply-primary"
-                    aria-label="Download vCard"
-                  >
-                    <FaEnvelope className="w-4 h-4" /> Download vCard
-                  </a>
-                </div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="space-y-6"
+        >
+          <div className="surface-card p-6 sm:p-8 space-y-5">
+            <div className="flex gap-4">
+              <span className="p-3 rounded-full bg-supply-light text-supply-primary">
+                <FaEnvelope />
+              </span>
+              <div>
+                <p className="text-xs uppercase tracking-wider text-supply-gray">Email</p>
+                <a href={`mailto:${profile.socialLinks.email}`} className="text-supply-dark hover:text-supply-primary">
+                  {profile.socialLinks.email}
+                </a>
               </div>
             </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-md">
-              <h3 className="text-xl font-semibold text-supply-dark mb-6">Connect With Me</h3>
+            {profile.contact.location && (
               <div className="flex gap-4">
-                <motion.a
-                  href={profile.socialLinks.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-4 rounded-full bg-supply-light text-supply-primary hover:bg-supply-primary hover:text-white transition-all duration-300 shadow-sm"
-                  aria-label="LinkedIn profile"
-                >
-                  <FaLinkedin className="w-6 h-6" />
-                </motion.a>
-
-                <motion.a
-                  href={profile.socialLinks.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-4 rounded-full bg-supply-light text-supply-primary hover:bg-supply-primary hover:text-white transition-all duration-300 shadow-sm"
-                  aria-label="GitHub profile"
-                >
-                  <FaGithub className="w-6 h-6" />
-                </motion.a>
-
-                <motion.a
-                  href={profile.socialLinks.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-4 rounded-full bg-supply-light text-supply-primary hover:bg-supply-primary hover:text-white transition-all duration-300 shadow-sm"
-                  aria-label="Twitter profile"
-                >
-                  <FaTwitter className="w-6 h-6" />
-                </motion.a>
-
-                <motion.a
-                  href={`mailto:${profile.socialLinks.email}`}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-4 rounded-full bg-supply-light text-supply-primary hover:bg-supply-primary hover:text-white transition-all duration-300 shadow-sm"
-                  aria-label="Send email"
-                >
-                  <FaEnvelope className="w-6 h-6" />
-                </motion.a>
+                <span className="p-3 rounded-full bg-supply-light text-supply-primary">
+                  <FaMapMarkerAlt />
+                </span>
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-supply-gray">Location</p>
+                  <p className="text-supply-dark">{profile.contact.location}</p>
+                </div>
               </div>
+            )}
+            <p className="text-sm text-supply-gray pt-2">{profile.contact.availability}</p>
+            <a
+              href={profile.contact.vcfFile}
+              download={profile.contact.vcfDownloadName}
+              className="inline-flex text-sm font-semibold text-supply-primary hover:underline"
+            >
+              Download vCard
+            </a>
+          </div>
 
-              <div className="mt-8 p-4 bg-supply-primary/10 rounded-lg">
-                <p className="text-supply-dark text-sm">
-                  I typically respond within 24 hours. 
-                </p>
-              </div>
+          <div className="surface-card p-6 sm:p-8">
+            <p className="text-xs uppercase tracking-wider text-supply-gray mb-4">Social</p>
+            <div className="flex gap-3">
+              <a
+                href={profile.socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-full bg-supply-light text-supply-dark hover:bg-supply-primary hover:text-white transition-colors"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="w-5 h-5" />
+              </a>
+              <a
+                href={profile.socialLinks.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-full bg-supply-light text-supply-dark hover:bg-supply-primary hover:text-white transition-colors"
+                aria-label="GitHub"
+              >
+                <FaGithub className="w-5 h-5" />
+              </a>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Contact;
