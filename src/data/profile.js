@@ -1,25 +1,25 @@
 const profile = {
   name: 'Sakshi Shukla',
   title: 'Data Engineer',
+  photo: '/sakshi.jpg',
   company: 'Tata Consultancy Services',
   startDate: 'June 2024',
   heroDescription:
-    'Data Engineer at Tata Consultancy Services since June 2024. I validate enterprise ETL/ELT pipelines, reconcile data across Bronze, Silver, and Gold layers, and use PySpark, SQL, and Azure to keep production data trustworthy.',
-  ctaText: 'View projects',
+    'I build and maintain data pipelines that collect, transform, and deliver information so teams can work with reliable, analytics-ready tables.',
+  ctaText: 'See selected work',
   highlights: [
-    { value: '2+', label: 'Years of experience' },
-    { value: 'TCS', label: 'Data Engineer since Jun 2024' },
-    { value: 'Medallion', label: 'Bronze · Silver · Gold' }
+    { value: '2+', label: 'Years experience' },
+    { value: 'TCS', label: 'Since June 2024' },
+    { value: 'Azure', label: 'PySpark · SQL' }
   ],
   about: {
     summary:
-      'I have 2+ years of experience as a Data Engineer at Tata Consultancy Services, joining in June 2024. I work on enterprise data pipelines with a focus on ETL/ELT testing, data quality validation, SQL verification, and reconciliation across Bronze, Silver, and Gold layers. That work has given me a practical view of the full data engineering lifecycle, from ingestion through analytics-ready tables.',
+      'Data Engineer at TCS since June 2024. I test pipelines, check data quality, and reconcile medallion layers from ingestion to analytics-ready tables.',
     careerFocus: [
-      'Data Engineering',
-      'ETL/ELT pipeline validation',
-      'PySpark & distributed processing',
-      'Data quality & testing',
-      'Cloud data platforms',
+      'ETL/ELT validation',
+      'PySpark',
+      'Data quality',
+      'Azure',
       'Medallion architecture'
     ],
     experiences: [
@@ -27,8 +27,11 @@ const profile = {
         company: 'Tata Consultancy Services',
         role: 'Data Engineer',
         duration: 'June 2024 – Present',
-        description:
-          'Validating enterprise ETL/ELT pipelines, running data quality and SQL checks, testing databases, and reconciling records across Bronze, Silver, and Gold layers with a focus on integrity and idempotent processing.'
+        points: [
+          'Validate ETL/ELT pipelines and run SQL and quality checks',
+          'Reconcile records across Bronze, Silver, and Gold layers',
+          'Test databases with a focus on integrity and idempotent processing'
+        ]
       }
     ],
     education: [
@@ -44,8 +47,7 @@ const profile = {
   contact: {
     location: 'India',
     availability: 'Open to Data Engineer roles',
-    intro:
-      'I am looking for Data Engineering roles where I can build and validate reliable pipelines. Reach out if you are hiring or want to collaborate.',
+    intro: 'Hiring or collaborating on data pipelines? Send a note and I will get back to you.',
     vcfFile: '/contact.vcf',
     vcfDownloadName: 'Sakshi_Shukla.vcf'
   },
@@ -64,7 +66,7 @@ const profile = {
   },
   projects: {
     githubText: 'More on GitHub',
-    callToAction: 'More Data Engineering, Python, SQL, and PySpark work lives on GitHub.'
+    callToAction: 'More pipeline and PySpark work is on GitHub.'
   }
 };
 

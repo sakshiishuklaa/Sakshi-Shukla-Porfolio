@@ -5,6 +5,7 @@ import profile from '../data/profile';
 
 const navLinks = [
   { name: 'Home', href: 'home' },
+  { name: 'Skills', href: 'skills' },
   { name: 'About', href: 'about' },
   { name: 'Projects', href: 'projects' },
   { name: 'Contact', href: 'contact' }
@@ -12,7 +13,6 @@ const navLinks = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
@@ -33,115 +33,128 @@ const Navbar = () => {
     return () => observer.disconnect();
   }, []);
 
-  const onScroll = useCallback(() => {
-    setScrolled(window.scrollY > 12);
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [onScroll]);
-
-  useEffect(() => {
+  const lockScroll = useCallback(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
+  }, [isOpen]);
+
+  useEffect(() => {
+    lockScroll();
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isOpen]);
+  }, [lockScroll]);
 
   const handleNavClick = (href) => {
     setIsOpen(false);
     const section = document.getElementById(href);
     if (!section) return;
-    const top = section.getBoundingClientRect().top + window.scrollY - 72;
+    const offset = window.matchMedia('(min-width: 1024px)').matches ? 16 : 72;
+    const top = section.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: 'smooth' });
   };
 
+  const navItems = (
+    <div className="flex flex-col gap-1">
+      {navLinks.map((link) => {
+        const isActive = activeSection === link.href;
+        return (
+          <button
+            key={link.name}
+            onClick={() => handleNavClick(link.href)}
+            className={`relative text-left px-3 py-2.5 rounded-xl text-sm font-medium tracking-[0.04em] transition-colors focus-ring ${
+              isActive
+                ? 'text-accent bg-accent/10 border border-accent/40'
+                : 'text-muted hover:text-ink hover:bg-white/5 border border-transparent'
+            }`}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {link.name}
+          </button>
+        );
+      })}
+    </div>
+  );
+
   return (
-    <motion.nav
-      className={`fixed top-0 w-full z-[90] transition-all duration-300 ${
-        scrolled
-          ? 'bg-[#f7f5f0]/90 backdrop-blur-md border-b border-supply-lightgray shadow-sm'
-          : 'bg-transparent'
-      }`}
-      role="navigation"
-      aria-label="Main navigation"
-      initial={{ y: -24, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-[72px] flex items-center justify-between">
+    <>
+      <header className="lg:hidden fixed top-0 inset-x-0 z-[90] h-[72px] bg-charcoal/90 backdrop-blur-md border-b border-accent/20">
+        <div className="h-full px-4 flex items-center justify-between">
+          <button
+            onClick={() => handleNavClick('home')}
+            className="font-heading text-lg font-bold text-ink focus-ring"
+            aria-label="Go to home"
+          >
+            {profile.name}
+          </button>
+          <button
+            onClick={() => setIsOpen((open) => !open)}
+            className="p-2 text-ink focus-ring"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <FaTimes className="w-5 h-5" /> : <FaBars className="w-5 h-5" />}
+          </button>
+        </div>
+      </header>
+
+      <aside
+        className="hidden lg:flex fixed top-0 left-0 z-[90] h-screen w-64 flex-col border-r border-accent/25 bg-charcoal/85 backdrop-blur-md"
+        role="navigation"
+        aria-label="Main navigation"
+      >
         <button
           onClick={() => handleNavClick('home')}
-          className="font-heading text-lg sm:text-xl text-supply-dark focus-ring"
+          className="px-6 pt-8 pb-6 text-left focus-ring"
           aria-label="Go to home"
         >
-          {profile.name}
+          <img
+            src={profile.photo}
+            alt={profile.name}
+            className="h-16 w-16 rounded-2xl border border-accent object-cover object-top"
+          />
+          <p className="mt-4 font-heading text-lg font-bold leading-tight text-ink">{profile.name}</p>
+          <p className="mt-1 text-xs text-muted">{profile.title}</p>
         </button>
 
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <button
-              key={link.name}
-              onClick={() => handleNavClick(link.href)}
-              className={`relative text-sm font-medium py-2 transition-colors focus-ring ${
-                activeSection === link.href
-                  ? 'text-supply-primary'
-                  : 'text-supply-gray hover:text-supply-dark'
-              }`}
-              aria-current={activeSection === link.href ? 'page' : undefined}
-            >
-              {link.name}
-              {activeSection === link.href && (
-                <motion.span
-                  layoutId="nav-underline"
-                  className="absolute left-0 -bottom-0.5 h-[2px] w-full bg-supply-primary"
-                />
-              )}
-            </button>
-          ))}
+        <nav className="flex-1 px-4 py-2">{navItems}</nav>
+
+        <div className="px-4 pb-8">
           <a
             href={`mailto:${profile.socialLinks.email}`}
-            className="text-sm font-semibold px-4 py-2 rounded-full bg-supply-dark text-white hover:bg-supply-primary transition-colors"
+            className="btn-primary w-full text-center"
           >
             Email me
           </a>
         </div>
-
-        <button
-          onClick={() => setIsOpen((open) => !open)}
-          className="md:hidden p-2 text-supply-dark focus-ring"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <FaTimes className="w-5 h-5" /> : <FaBars className="w-5 h-5" />}
-        </button>
-      </div>
+      </aside>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            className="md:hidden border-t border-supply-lightgray bg-[#f7f5f0] px-4 py-4 space-y-1"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="lg:hidden fixed inset-0 z-[80] bg-charcoal/70"
+            onClick={() => setIsOpen(false)}
           >
-            {navLinks.map((link) => (
-              <button
-                key={link.name}
-                onClick={() => handleNavClick(link.href)}
-                className={`block w-full text-left px-3 py-3 rounded-xl text-base ${
-                  activeSection === link.href
-                    ? 'bg-white text-supply-primary font-semibold'
-                    : 'text-supply-dark'
-                }`}
+            <motion.aside
+              initial={{ x: -24, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -24, opacity: 0 }}
+              className="absolute top-[72px] left-0 bottom-0 w-72 bg-charcoal border-r border-accent/25 p-4"
+              onClick={(event) => event.stopPropagation()}
+            >
+              {navItems}
+              <a
+                href={`mailto:${profile.socialLinks.email}`}
+                className="btn-primary w-full text-center mt-6"
               >
-                {link.name}
-              </button>
-            ))}
+                Email me
+              </a>
+            </motion.aside>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 };
 

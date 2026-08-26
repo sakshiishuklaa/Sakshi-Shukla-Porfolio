@@ -8,20 +8,22 @@ import Navbar from './components/Navbar';
 import Projects from './components/Projects';
 import ScrollAnimation from './components/ScrollAnimation';
 import ScrollProgress from './components/ScrollProgress';
+import Skills from './components/Skills';
 import './styles/theme.css';
 
 const App = () => (
   <Router>
     <AnimatePresence mode="wait">
       <motion.div
-        className="min-h-screen text-supply-dark bg-supply-background"
+        className="min-h-screen text-ink bg-charcoal relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        <ScrollProgress color="#0F766E" />
+        <div className="network-bg" aria-hidden="true" />
+        <ScrollProgress color="#FF5A36" />
         <Navbar />
-        <main id="main-content" className="pt-[72px] relative z-10">
+        <main id="main-content" className="relative z-10 pt-[72px] lg:pt-0 lg:ml-64">
           <Routes>
             <Route
               path="/"
@@ -30,7 +32,12 @@ const App = () => (
                   <section id="home">
                     <Hero />
                   </section>
-                  <section id="about" className="scroll-mt-24 py-16 sm:py-20 bg-supply-background-alt/60">
+                  <section id="skills" className="scroll-mt-24 py-16 sm:py-20">
+                    <ScrollAnimation>
+                      <Skills />
+                    </ScrollAnimation>
+                  </section>
+                  <section id="about" className="scroll-mt-24 py-16 sm:py-20">
                     <ScrollAnimation>
                       <About />
                     </ScrollAnimation>
@@ -40,7 +47,7 @@ const App = () => (
                       <Projects />
                     </ScrollAnimation>
                   </section>
-                  <section id="contact" className="scroll-mt-24 py-16 sm:py-20 bg-supply-background-alt/60">
+                  <section id="contact" className="scroll-mt-24 py-16 sm:py-20">
                     <ScrollAnimation>
                       <Contact />
                     </ScrollAnimation>
@@ -50,7 +57,9 @@ const App = () => (
             />
           </Routes>
         </main>
-        <Footer />
+        <div className="relative z-10 lg:ml-64">
+          <Footer />
+        </div>
       </motion.div>
     </AnimatePresence>
   </Router>

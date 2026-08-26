@@ -13,7 +13,7 @@ const ScrollProgress = ({ color }) => {
       className="fixed top-0 left-0 right-0 h-1 origin-left z-50"
       style={{ 
         scaleX,
-        background: color || '#4361EE' // Use provided color or default to primary blue
+        background: color || '#1A1A1A'
       }}
       role="progressbar"
       aria-valuemin={0}

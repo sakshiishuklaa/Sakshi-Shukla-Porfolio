@@ -1,5 +1,15 @@
 :root {
-  --color-primary: #0f766e;
-  --color-text: #0b1220;
-  --color-background: #f7f5f0;
+  --color-charcoal: #151515;
+  --color-surface: #2C2421;
+  --color-accent: #FF5A36;
+  --color-ink: #F4F0EC;
+  --color-muted: #A89F98;
+  --color-brush: #151515;
+  --color-cream: #F4F0EC;
+  --color-burgundy: #F4F0EC;
+  --color-brass: #FF5A36;
+  --color-primary: #FF5A36;
+  --color-text: #F4F0EC;
+  --color-background: #151515;
+  --color-light: #F4F0EC;
 }
