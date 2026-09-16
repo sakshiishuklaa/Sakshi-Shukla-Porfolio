@@ -10,6 +10,7 @@ const profile = {
   highlights: [
     { value: '2+', label: 'Years experience' },
     { value: 'TCS', label: 'Since June 2024' },
+    { value: 'AWS', label: 'Solutions Architect' },
     { value: 'Azure', label: 'PySpark · SQL' }
   ],
   about: {
@@ -20,7 +21,14 @@ const profile = {
       'PySpark',
       'Data quality',
       'Azure',
+      'AWS',
       'Medallion architecture'
+    ],
+    certifications: [
+      {
+        name: 'AWS Certified Solutions Architect – Associate',
+        issuer: 'Amazon Web Services'
+      }
     ],
     experiences: [
       {
@@ -60,7 +68,7 @@ const profile = {
     languages: ['Python', 'SQL'],
     frameworks: ['PySpark', 'Pandas', 'NumPy'],
     databases: ['MySQL', 'Google BigQuery'],
-    cloud: ['Microsoft Azure'],
+    cloud: ['Amazon Web Services (AWS)', 'Microsoft Azure'],
     bigData: ['Apache Spark'],
     tools: ['Databricks', 'Snowflake', 'Apache Airflow', 'dbt', 'Git', 'GitHub']
   },

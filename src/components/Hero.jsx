@@ -49,7 +49,7 @@ const Hero = () => (
             </a>
           </div>
 
-          <div className="grid grid-cols-3 gap-6 sm:gap-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
             {profile.highlights.map((item) => (
               <div key={item.label}>
                 <p className="font-heading text-xl sm:text-2xl font-bold text-accent">{item.value}</p>

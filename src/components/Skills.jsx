@@ -1,7 +1,7 @@
 import profile from '../data/profile';
 import SectionHeading from './SectionHeading';
 
-const featured = ['SQL', 'Python', 'ETL'];
+const featured = ['SQL', 'Python', 'ETL', 'AWS'];
 
 const extraSkills = [
   ...profile.skills.frameworks,
@@ -9,7 +9,7 @@ const extraSkills = [
   ...profile.skills.cloud,
   ...profile.skills.bigData,
   ...profile.skills.tools,
-];
+].filter((skill) => skill !== 'Amazon Web Services (AWS)');
 
 const Skills = () => (
   <div className="max-w-6xl mx-auto px-4 sm:px-8">
