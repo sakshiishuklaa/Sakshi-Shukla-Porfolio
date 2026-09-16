@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaAward, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
+import { FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 import profile from '../data/profile';
 import SectionHeading from './SectionHeading';
 
@@ -58,17 +58,6 @@ const About = () => (
             <p className="text-sm text-muted mt-1">
               {item.duration} · CGPA {item.cgpa}
             </p>
-          </div>
-        ))}
-
-        <div className="flex items-center gap-2 mt-8 mb-3">
-          <FaAward className="text-accent w-4 h-4" />
-          <h3 className="label-caps">Certifications</h3>
-        </div>
-        {profile.about.certifications.map((item) => (
-          <div key={item.name}>
-            <p className="font-heading text-lg font-bold text-ink">{item.name}</p>
-            <p className="text-sm text-muted mt-1">{item.issuer}</p>
           </div>
         ))}
 

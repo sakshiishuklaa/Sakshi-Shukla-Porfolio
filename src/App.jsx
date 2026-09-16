@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import About from './components/About';
+import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Footer from './components/FooterComponent';
 import Hero from './components/Hero';
@@ -45,6 +46,11 @@ const App = () => (
                   <section id="projects" className="scroll-mt-24 py-16 sm:py-20">
                     <ScrollAnimation>
                       <Projects />
+                    </ScrollAnimation>
+                  </section>
+                  <section id="certifications" className="scroll-mt-24 py-16 sm:py-20">
+                    <ScrollAnimation>
+                      <Certifications />
                     </ScrollAnimation>
                   </section>
                   <section id="contact" className="scroll-mt-24 py-16 sm:py-20">

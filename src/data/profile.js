@@ -24,12 +24,6 @@ const profile = {
       'AWS',
       'Medallion architecture'
     ],
-    certifications: [
-      {
-        name: 'AWS Certified Solutions Architect – Associate',
-        issuer: 'Amazon Web Services'
-      }
-    ],
     experiences: [
       {
         company: 'Tata Consultancy Services',
@@ -52,6 +46,28 @@ const profile = {
       }
     ]
   },
+  certifications: [
+    {
+      name: 'AWS Certified Solutions Architect – Associate',
+      issuer: 'Amazon Web Services'
+    },
+    {
+      name: 'Claude Certified Developer - Foundations',
+      issuer: 'Anthropic'
+    },
+    {
+      name: 'Microsoft Certified: DevOps Engineer Expert',
+      issuer: 'Microsoft'
+    },
+    {
+      name: 'Microsoft Certified: Azure Administrator Associate',
+      issuer: 'Microsoft'
+    },
+    {
+      name: 'Python Programming – A Practical Approach',
+      issuer: 'Indian Institute of Technology Kanpur'
+    }
+  ],
   contact: {
     location: 'India',
     availability: 'Open to Data Engineer roles',
