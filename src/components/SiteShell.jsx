@@ -58,9 +58,17 @@ function Header() {
     setOpen(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
+
   return (
+    <>
     <motion.header
-      className="sticky top-0 z-40 border-b border-transparent bg-background/80 backdrop-blur-md"
+      className="site-header sticky top-0 z-[80] border-b border-transparent backdrop-blur-md"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20, mass: 0.5, duration: 0.1 }}
@@ -146,12 +154,13 @@ function Header() {
           </motion.button>
         </div>
       </div>
+    </motion.header>
 
       <AnimatePresence>
         {open && (
           <>
             <motion.div
-              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
+              className="fixed inset-x-0 bottom-0 top-[76px] z-[60] bg-black/50 md:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -159,7 +168,7 @@ function Header() {
               onClick={() => setOpen(false)}
             />
             <motion.nav
-              className="absolute left-4 right-4 top-full z-50 mt-2 overflow-hidden rounded-2xl border border-border bg-background/95 p-3 shadow-card backdrop-blur-xl md:hidden"
+              className="fixed left-4 right-4 top-[84px] z-[70] overflow-hidden rounded-2xl border border-border bg-card p-3 shadow-card md:hidden"
               aria-label="Mobile navigation"
               initial={{ opacity: 0, scale: 0.96, y: -8 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -171,6 +180,7 @@ function Header() {
                   key={item.to}
                   to={item.to}
                   end={item.to === '/'}
+                  onClick={() => setOpen(false)}
                   className={({ isActive }) =>
                     `block rounded-control px-3 py-2 text-sm ${isActive ? 'bg-secondary' : ''}`
                   }
@@ -182,7 +192,7 @@ function Header() {
           </>
         )}
       </AnimatePresence>
-    </motion.header>
+    </>
   );
 }
 

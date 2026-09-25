@@ -81,6 +81,10 @@ body {
   background: var(--secondary);
 }
 
+.site-header {
+  background: color-mix(in srgb, var(--background) 92%, transparent);
+}
+
 .caret {
   animation: blink 1s steps(1) infinite;
 }
