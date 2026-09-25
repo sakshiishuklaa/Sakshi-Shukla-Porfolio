@@ -1,74 +1,47 @@
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import About from './components/About';
-import Certifications from './components/Certifications';
-import Contact from './components/Contact';
-import Footer from './components/FooterComponent';
-import Hero from './components/Hero';
-import Navbar from './components/Navbar';
-import Projects from './components/Projects';
-import ScrollAnimation from './components/ScrollAnimation';
-import ScrollProgress from './components/ScrollProgress';
-import Skills from './components/Skills';
-import './styles/theme.css';
+import SiteShell from './components/SiteShell';
+import { SiteProvider } from './context/SiteContext';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import HomePage from './pages/HomePage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
+import ProjectsPage from './pages/ProjectsPage';
 
-const App = () => (
-  <Router>
+const pageFade = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.3, ease: 'easeInOut' } },
+  exit: { opacity: 0, transition: { duration: 0.2, ease: 'easeInOut' } }
+};
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
     <AnimatePresence mode="wait">
-      <motion.div
-        className="min-h-screen text-ink bg-charcoal relative"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        <div className="network-bg" aria-hidden="true" />
-        <ScrollProgress color="#FF5A36" />
-        <Navbar />
-        <main id="main-content" className="relative z-10 pt-[72px] lg:pt-0 lg:ml-64">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <section id="home">
-                    <Hero />
-                  </section>
-                  <section id="skills" className="scroll-mt-24 py-16 sm:py-20">
-                    <ScrollAnimation>
-                      <Skills />
-                    </ScrollAnimation>
-                  </section>
-                  <section id="about" className="scroll-mt-24 py-16 sm:py-20">
-                    <ScrollAnimation>
-                      <About />
-                    </ScrollAnimation>
-                  </section>
-                  <section id="projects" className="scroll-mt-24 py-16 sm:py-20">
-                    <ScrollAnimation>
-                      <Projects />
-                    </ScrollAnimation>
-                  </section>
-                  <section id="certifications" className="scroll-mt-24 py-16 sm:py-20">
-                    <ScrollAnimation>
-                      <Certifications />
-                    </ScrollAnimation>
-                  </section>
-                  <section id="contact" className="scroll-mt-24 py-16 sm:py-20">
-                    <ScrollAnimation>
-                      <Contact />
-                    </ScrollAnimation>
-                  </section>
-                </>
-              }
-            />
-          </Routes>
-        </main>
-        <div className="relative z-10 lg:ml-64">
-          <Footer />
-        </div>
+      <motion.div key={location.pathname} initial="initial" animate="animate" exit="exit" variants={pageFade}>
+        <Routes location={location}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/experience" element={<Navigate to="/#experience" replace />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </motion.div>
     </AnimatePresence>
-  </Router>
+  );
+}
+
+const App = () => (
+  <SiteProvider>
+    <BrowserRouter>
+      <SiteShell>
+        <AnimatedRoutes />
+      </SiteShell>
+    </BrowserRouter>
+  </SiteProvider>
 );
 
 export default App;

@@ -1,58 +1,34 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./index.html', './src/**/*.{js,jsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        charcoal: '#151515',
-        surface: '#2C2421',
-        accent: {
-          DEFAULT: '#FF5A36',
-          muted: '#8B3A28',
-        },
-        cream: '#F4F0EC',
-        ink: '#F4F0EC',
-        muted: '#A89F98',
-        brush: '#151515',
-        burgundy: {
-          DEFAULT: '#F4F0EC',
-          muted: '#A89F98',
-        },
-        brass: '#FF5A36',
-        supply: {
-          primary: '#FF5A36',
-          secondary: '#151515',
-          accent: '#FF5A36',
-          highlight: '#FF5A36',
-          success: '#FF5A36',
-          dark: '#151515',
-          gray: '#A89F98',
-          lightgray: '#2C2421',
-          light: '#F4F0EC',
-          background: '#151515',
-          'background-alt': '#2C2421',
-          'background-dark': '#151515',
-        },
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        card: 'var(--card)',
+        'card-foreground': 'var(--card-foreground)',
+        primary: 'var(--primary)',
+        'primary-foreground': 'var(--primary-foreground)',
+        secondary: 'var(--secondary)',
+        'secondary-foreground': 'var(--secondary-foreground)',
+        muted: 'var(--muted)',
+        'muted-foreground': 'var(--muted-foreground)',
+        border: 'var(--border)',
+        ring: 'var(--ring)'
       },
       fontFamily: {
-        sans: ['Inter', 'Helvetica', 'Arial', 'sans-serif'],
-        heading: ['Inter', 'Helvetica', 'Arial', 'sans-serif'],
-      },
-      fontSize: {
-        body: ['1.0625rem', { lineHeight: '1.65' }],
-        display: ['clamp(2.75rem, 8vw, 5.5rem)', { lineHeight: '1.02', letterSpacing: '-0.04em' }],
+        sans: ['Satoshi', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
       },
       boxShadow: {
-        soft: '0 22px 48px -28px rgba(0, 0, 0, 0.55)',
-        card: '0 14px 36px -22px rgba(0, 0, 0, 0.45)',
+        card: '0 18px 50px -28px rgba(80, 60, 140, 0.45)',
+        float: '0 10px 30px -16px rgba(40, 20, 80, 0.35)'
       },
       borderRadius: {
-        card: '1.25rem',
-      },
-    },
+        control: '0.625rem'
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 };

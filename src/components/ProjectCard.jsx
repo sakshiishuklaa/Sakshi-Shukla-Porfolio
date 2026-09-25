@@ -1,46 +1,67 @@
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import TechBadge from './TechBadge';
+import { FiArrowRight, FiExternalLink } from 'react-icons/fi';
 
-const ProjectCard = ({ project }) => (
-  <article className="surface-card h-full p-6 sm:p-8 flex flex-col group hover:border-accent transition-colors">
-    {project.category && (
-      <p className="label-caps mb-3">
-        {project.category}
-      </p>
-    )}
-    <h3 className="font-heading text-2xl font-bold text-ink group-hover:text-accent transition-colors">
-      {project.title}
-    </h3>
-    <p className="text-muted text-sm leading-relaxed mt-3 flex-1">{project.description}</p>
-    <div className="flex flex-wrap gap-2 mt-5">
-      {project.techStack?.map((tech) => (
-        <span key={tech} className="chip-accent">
-          {tech}
-        </span>
-      ))}
+export function Preview({ image, title, zoom = false }) {
+  if (zoom) {
+    return (
+      <div className="project-preview aspect-[1024/518] overflow-hidden rounded-xl border border-border bg-secondary">
+        <img
+          src={image}
+          alt={`${title} dashboard`}
+          className="h-full w-full object-cover object-top transition-transform duration-300 hover:scale-105"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="overflow-hidden rounded-xl border border-border bg-secondary">
+      <img
+        src={image}
+        alt={`${title} dashboard`}
+        className="h-48 w-full object-cover object-top transition-transform duration-300 hover:scale-105 sm:h-52"
+      />
     </div>
-    <div className="flex gap-3 mt-6">
-      {project.githubLink && (
+  );
+}
+
+export default function ProjectCard({ project }) {
+  const extra = Math.max(project.techStack.length - 4, 0);
+
+  return (
+    <article className="panel flex h-full flex-col p-4 transition-all duration-300 hover:border-primary sm:p-5">
+      <Preview image={project.image} title={project.title} zoom={/swiggy|uber/.test(project.image)} />
+      <h3 className="mt-5 text-xl font-bold tracking-tight">{project.title}</h3>
+      <p className="mt-2 text-sm leading-6 text-muted-foreground">{project.description}</p>
+      <div className="mt-4 flex flex-wrap gap-2">
+        {project.techStack.slice(0, 4).map((tech) => (
+          <TechBadge key={tech} name={tech} />
+        ))}
+        {extra > 0 && <span className="pill">+{extra}</span>}
+      </div>
+      <ul className="mt-4 space-y-2 text-sm leading-6 text-muted-foreground">
+        {project.highlights.slice(0, 2).map((item) => (
+          <li key={item} className="flex gap-2">
+            <span className="mt-1 text-primary">→</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-auto flex items-center justify-between pt-6">
+        <Link to={`/projects/${project.slug}`} className="btn-outline group">
+          View Details <FiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
         <a
           href={project.githubLink}
           target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm font-semibold tracking-[0.04em] text-ink hover:text-accent"
+          rel="noreferrer"
+          aria-label={`${project.title} on GitHub`}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full text-foreground hover:bg-secondary"
         >
-          <FaGithub className="w-4 h-4" /> GitHub
+          <FiExternalLink className="h-4 w-4" />
         </a>
-      )}
-      {project.demoLink && (
-        <a
-          href={project.demoLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm font-semibold tracking-[0.04em] text-ink hover:text-accent"
-        >
-          <FaExternalLinkAlt className="w-3.5 h-3.5" /> Demo
-        </a>
-      )}
-    </div>
-  </article>
-);
-
-export default ProjectCard;
+      </div>
+    </article>
+  );
+}
