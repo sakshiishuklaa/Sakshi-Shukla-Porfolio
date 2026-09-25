@@ -17,12 +17,12 @@ const profile = {
     summary:
       'Data Engineer at TCS since June 2024. I test pipelines, check data quality, and reconcile medallion layers from ingestion to analytics-ready tables.',
     careerFocus: [
-      'ETL/ELT validation',
-      'PySpark',
-      'Data quality',
-      'Azure',
-      'AWS',
-      'Medallion architecture'
+      'Data Structures',
+      'Algorithms',
+      'DBMS',
+      'Operating Systems',
+      'Computer Networks',
+      'OOP'
     ],
     experiences: [
       {
