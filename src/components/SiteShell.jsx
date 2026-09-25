@@ -260,7 +260,7 @@ function Footer() {
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        {new Date().getFullYear()} {profile.name}. Built with <span className="text-primary">♥</span> using React & Tailwind
+        © {new Date().getFullYear()} {profile.name}. All rights reserved.
       </motion.div>
     </footer>
   );
