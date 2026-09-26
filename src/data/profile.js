@@ -106,15 +106,16 @@ const profile = {
     availability: 'Open to Data Engineer roles'
   },
   socialLinks: {
-    linkedin: 'https://www.linkedin.com/in/sakshi99805632/',
-    linkedinLabel: 'linkedin.com/in/sakshi99805632',
+    linkedin: 'https://www.linkedin.com/in/sakshiiishuklaa/',
+    linkedinLabel: 'linkedin.com/in/sakshiiishuklaa',
     github: 'https://github.com/sakshiishuklaa',
     githubLabel: 'github.com/sakshiishuklaa',
     email: 'sakshishukla.tech@gmail.com'
   },
   resume: {
-    file: '/Sakshi-Shukla-DataEngineer-Resume.pdf',
-    downloadName: 'Sakshi-Shukla-DataEngineer-Resume.pdf'
+    file: '/Sakshi-Shukla-DE-Resume.pdf',
+    downloadName: 'Sakshi-Shukla-DE-Resume.pdf',
+    preview: '/resume-preview.png'
   }
 };
 
